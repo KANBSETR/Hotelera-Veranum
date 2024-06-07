@@ -237,4 +237,14 @@ class RegistroHabitacion (models.Model):
        
         def __str__(self):
             return self.descripcion
-
+#Requerimiento 13 al 17 - Inventario
+class HotelDetalle (models.Model):
+        id_hotel_detalle = models.AutoField(primary_key=True)
+        descripcion = models.CharField(max_length=350)
+        id_hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+        id_tipo_habitacion = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
+        id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+        id_registro_servicio_adicional = models.ForeignKey(RegistroServicioAdicional, on_delete=models.CASCADE)
+        
+        def __str__(self):
+            return self.nombre
