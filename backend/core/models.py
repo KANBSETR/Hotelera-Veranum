@@ -121,7 +121,7 @@ class RegistroCuentaEmpleados(models.Model):
     
     
 #Ej: vip, nose ,normal ,etc
-class Categoria (models.Models):
+class Categoria (models.Model):
         id_categoria = models.AutoField(primary_key=True)
         nombre = models.CharField(max_length=50)
         descripcion = models.CharField(max_length=50)
@@ -141,7 +141,7 @@ class Categoria (models.Models):
             return self.nombre
 
 #Ej: habitacion simple, doble, triple, etc
-class TipoHabitacion (models.Models):
+class TipoHabitacion (models.Model):
         id_tipo_habitacion = models.AutoField(primary_key=True)
         nombre = models.CharField(max_length=50)
         descripcion = models.CharField(max_length=50)
@@ -160,7 +160,7 @@ class TipoHabitacion (models.Models):
             return self.nombre
 
 #Ej: wifi, tv, etc
-class RegistroServicioAdicional (models.Models):
+class RegistroServicioAdicional (models.Model):
         id_servicio = models.AutoField(primary_key=True)
         nombre = models.CharField(max_length=50)
         descripcion = models.CharField(max_length=50)
@@ -193,7 +193,7 @@ class RegistroServicioAdicional (models.Models):
         def __str__(self):
             return self.nombre
         
-class Hotel (models.Models):
+class Hotel (models.Model):
         id_hotel = models.AutoField(primary_key=True)
         patente_hotel = models.CharField(max_length=50)
         nombre = models.CharField(max_length=50)
@@ -207,7 +207,7 @@ class Hotel (models.Models):
         def __str__(self):
             return self.nombre
 
-class RegistroHabitacion (models.Models):
+class RegistroHabitacion (models.Model):
         id_habitacion = models.AutoField(primary_key=True)
         numero_habitacion = models.IntegerField()
         cant_dormitorios = models.IntegerField()
