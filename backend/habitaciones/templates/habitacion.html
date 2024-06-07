@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+
+<h1>Hotel Veranum</h1>
+<br>
+<h4>Habitaciones</h4>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>numero_habitacion</th>
+            <th>cant_dormitorios</th>
+            <th>cant_banos</th>
+            <th>cant_camas</th>
+            <th>tamano_camas</th>
+            <th>cant_personas_disp</th>
+            <th>descripcion</th>
+            <th>precio</th>
+            <th>estado_habitacion</th>
+            <th>id_servicio</th>
+            <th>id_tipo_habitacion</th>
+            <th>id_empleado</th>
+            <th>id_hotel</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for habitacion in habitaciones %}
+        <tr>
+            <td><a href="{% url 'habitacion_detail' habitacion.id_habitacion %}">{{ habitacion.numero_habitacion }}</a></td>
+            <td>{{ habitacion.cant_dormitorios }}</td>
+            <td>{{ habitacion.cant_banos }}</td>
+            <td>{{ habitacion.cant_camas }}</td>
+            <td>{{ habitacion.tamano_camas }}</td>
+            <td>{{ habitacion.cant_personas_disp }}</td>
+            <td>{{ habitacion.descripcion }}</td>
+            <td>{{ habitacion.precio }}</td>
+            <td>{{ habitacion.estado_habitacion }}</td>
+            <td>{{ habitacion.id_servicio }}</td>
+            <td>{{ habitacion.id_tipo_habitacion }}</td>
+            <td>{{ habitacion.id_empleado }}</td>
+            <td>{{ habitacion.id_hotel }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{%endblock%}

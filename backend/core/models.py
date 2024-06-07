@@ -34,7 +34,7 @@ class RegistroCuentaUsuario (models.Model):
     ap_paterno = models.CharField(max_length=50)
     ap_materno = models.CharField(max_length=50)
     correo = models.EmailField()
-    contraseña = models.CharField(max_length=50)
+    contrasena = models.CharField(max_length=50)
     telefono = models.CharField(max_length=8)
     direccion = models.CharField(max_length=50)
     #Campos de fecha
@@ -56,13 +56,13 @@ class RegistroCuentaUsuario (models.Model):
 #Solo el admin puede manejar estos registros
 class RegistroCuentaEmpleados(models.Model):
     # Campos de texto
-    rut = models.CharField(max_length=10, unique=True, primary_key=True)    
+    rut = models.CharField(max_length=10, unique=True, primary_key=True, help_text="Ingrese el RUT sin puntos ni guión")    
     nombre_usuario = models.CharField(max_length=50, unique=True)
     nombre = models.CharField(max_length=50)
     ap_paterno = models.CharField(max_length=50)
     ap_materno = models.CharField(max_length=50)
     correo_alternativo = models.EmailField(null=True, blank=True)
-    contraseña = models.CharField(
+    contrasena = models.CharField(
         max_length=50,
         validators=[
             RegexValidator(
@@ -116,8 +116,20 @@ class RegistroCuentaEmpleados(models.Model):
     
     roles = models.CharField(max_length=50, choices=OPCIONES_ROL, default='Usuario')
     
+    def validate_unique(self, exclude=None):
+        exclude = ('rut',) if exclude is None else tuple(exclude) + ('rut',)
+        super().validate_unique(exclude=exclude)
+        
     def __str__(self):
-        return self.nombre
+        if self.nombre_usuario == 'admin':
+            return 'Usuario admin'
+        return f'Usuario: {self.nombre_usuario} - Rut: {str(self.rut)}'
+    
+    def __str__(self):
+        if self.nombre_usuario == 'empleado':
+            return 'Usuario empleado'
+        return f'Usuario: {self.nombre_usuario} - Rut: {str(self.rut)}'
+    
     
     
 #Ej: vip, nose ,normal ,etc
@@ -224,5 +236,5 @@ class RegistroHabitacion (models.Model):
         id_hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
        
         def __str__(self):
-            return self.numero_habitacion
+            return self.descripcion
 

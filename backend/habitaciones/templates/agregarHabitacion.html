@@ -1,0 +1,14 @@
+{%extends "base.html"%}
+{%block content%}
+
+
+{{error}}
+<h1>Habitiacion al Hotel</h1>
+    <form method="POST">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button>
+            Agregar
+        </button>
+    </form>
+{%endblock%}

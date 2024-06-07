@@ -22,6 +22,8 @@
             </div>
                 <div class="content-form">
                     <form method="POST">
+                        {%csrf_token%}
+
                             <label for="nombre_usuario">Nombre de usuario:</label>
                             <br>
                         <div class="input-style">
