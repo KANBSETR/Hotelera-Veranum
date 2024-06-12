@@ -19,7 +19,7 @@
     <header>
         <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
             <div class="container d-flex justify-content-between align-items-center">
-                <a class="navbar-brand h1" href="{% url 'inicio' %}">
+                <a class="navbar-brand h1" href="{% url 'listar_habitaciones' %}">
                     <i class='bx bx-buildings bx-sm text-dark'></i>
                     <span class="text-dark h4">Veranum</span>
                 </a>
@@ -31,7 +31,7 @@
                     <div class="flex-fill mx-xl-5 mb-2">
                         <ul class="nav navbar-nav d-flex justify-content-between mx-xl-5 text-center text-dark">
                             <li class="nav-item">
-                                <a class="nav-link btn-outline-primary rounded-pill px-3" href="#">Alojamiento</a>
+                                <a class="nav-link btn-outline-primary rounded-pill px-3" href="{% url 'agregarHabitacion' %}">Alojamiento</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link btn-outline-primary rounded-pill px-3" href="#">Nuestros hoteles</a>
@@ -67,7 +67,7 @@
                 <div class="col-lg-3 col-12 align-left">
                     <a class="navbar-brand" href="index.html">
                         <i class='bx bx-buildings bx-sm text-light'></i>
-                        <span class="text-light h5">Purple</span> <span class="text-light h5 semi-bold-600">Buzz</span>
+                        <span class="text-light h5">Veranum</span> <span class="text-light h5 semi-bold-600">Company</span>
                     </a>
                     <p class="text-light my-lg-4 my-2">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -103,52 +103,49 @@
                 </div>
 
                 <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h3 class="h4 pb-lg-3 text-light light-300">Our Company</h2>
+                    <h3 class="h4 pb-lg-3 text-light light-300">Nuestra Compañia</h2>
                         <ul class="list-unstyled text-light light-300">
                             <li class="pb-2">
                                 <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" href="index.html">Home</a>
                             </li>
                             <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="about.html">About Us</a>
+                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="about.html">Acerca de nosotros</a>
                             </li>
                             <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="work.html">Work</a>
+                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="work.html">Nuestro trabajo</a>
                             </li>
                             <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a class="text-decoration-none text-light py-1" href="pricing.html">Price</a>
+                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a class="text-decoration-none text-light py-1" href="pricing.html">Precios</a>
                             </li>
                             <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="contact.html">Contact</a>
+                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="contact.html">Contactos</a>
                             </li>
                         </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h2 class="h4 pb-lg-3 text-light light-300">Our Works</h2>
+                    <h2 class="h4 pb-lg-3 text-light light-300">Nuestros Trabajos</h2>
                     <ul class="list-unstyled text-light light-300">
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Branding</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Marcas</a>
                         </li>
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Business</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Compañias</a>
                         </li>
                         <li class="pb-2">
                             <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Marketing</a>
                         </li>
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Social Media</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Redes Sociales</a>
                         </li>
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Digital Solution</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Graphic</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Graficos</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h2 class="h4 pb-lg-3 text-light light-300">For Client</h2>
+                    <h2 class="h4 pb-lg-3 text-light light-300">Nuestros clientes</h2>
                     <ul class="list-unstyled text-light light-300">
                         <li class="pb-2">
                             <i class='bx-fw bx bx-phone bx-xs'></i><a class="text-decoration-none text-light py-1" href="tel:010-020-0340">010-020-0340</a>
@@ -167,7 +164,7 @@
                 <div class="row pt-2">
                     <div class="col-lg-6 col-sm-12">
                         <p class="text-lg-start text-center text-light light-300">
-                            © Copyright 2021 Purple Buzz Company. All Rights Reserved.
+                            © Copyright 2021 Veranum Company. All Rights Reserved.
                         </p>
                     </div>
                     <div class="col-lg-6 col-sm-12">

@@ -1,82 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
-    
+
     <!-- formulario.html -->
     <script src="/static/js/form.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--Styles-->
     <link rel="stylesheet" href="/static/css/styleForms.css">
-    
+
 
 </head>
-<body>
 
+<body>
     <div class="container-center">
         <div class="form-div">
             <div class="title-form">
                 <h1>Registro de Usuario</h1>
             </div>
-                <div class="content-form">
-                    <form method="POST">
-                        {%csrf_token%}
+            <div class="content-form">
+                <form method="POST">
+                    {%csrf_token%}
 
-                            <label for="nombre_usuario">Nombre de usuario:</label>
-                            <br>
-                        <div class="input-style">
-                            <input type="text" id="nombre_usuario" name="nombre_usuario" required>
-                        </div>
-                        
-                        <div class="input-style">
-                            <label for="nombre">Nombre:</label><br>
-                            <input type="text" id="nombre" name="nombre" required>
-                        </div>
-                        
-                        <div class="input-style">
-                            <label for="ap_paterno">Apellido Paterno:</label><br>
-                            <input type="text" id="ap_paterno" name="ap_paterno" required>
-                        </div>
-                        <div class="input-style">
-                            <label for="ap_materno">Apellido Materno:</label><br>
-                            <input type="text" id="ap_materno" name="ap_materno" required>
-                        </div>
-                        
-                        <div class="input-style">
-                            <label for="correo">Correo:</label><br>
-                            <input type="email" id="correo" name="correo" required>
-                        </div>
-                        
-                        <div class="input-style">
-                            <label for="contraseña">Contraseña:</label><br>
-                            <input type="password" id="contraseña" name="contraseña" required>
-                        </div>
-                        
-                        <div class="input-style">
-                            <label for="telefono">Teléfono:</label><br>
-                            <input type="tel" id="telefono" name="telefono" required>
-                        </div>
-                        
-                        <div class="input-style">
-                            <label for="direccion">Dirección:</label><br>
-                            <input type="text" id="direccion" name="direccion" required>
-                        </div>
-                        
-                        <div class="input-style">
-                            <label for="fecha_nacimiento">Fecha de Nacimiento:</label><br>
-                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
-                        </div>
-                        <select id="regiones"></select>
-                        <select id="provincias"></select>
-                        <select id="comunas"></select>
-                        
+                    {{form.as_p}}
+
+                    <label for="nombre_usuario">Nombre de usuario:</label>
+                    <br>
+                    <div class="input-style">
+                        <input type="text" id="nombre_usuario" name="nombre_usuario" required>
+                    </div>
+
+                    <div class="input-style">
+                        <label for="nombre">Nombre:</label><br>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+
+                    <div class="input-style">
+                        <label for="ap_paterno">Apellido Paterno:</label><br>
+                        <input type="text" id="ap_paterno" name="ap_paterno" required>
+                    </div>
+                    <div class="input-style">
+                        <label for="ap_materno">Apellido Materno:</label><br>
+                        <input type="text" id="ap_materno" name="ap_materno" required>
+                    </div>
+
+                    <div class="input-style">
+                        <label for="correo">Correo:</label><br>
+                        <input type="email" id="correo" name="correo" required>
+                    </div>
+
+                    <div class="input-style">
+                        <label for="contraseña">Contraseña:</label><br>
+                        <input type="password" id="contraseña" name="contraseña" required>
+                    </div>
+
+                    <div class="input-style">
+                        <label for="telefono">Teléfono:</label><br>
+                        <input type="tel" id="telefono" name="telefono" required>
+                    </div>
+
+                    <div class="input-style">
+                        <label for="direccion">Dirección:</label><br>
+                        <input type="text" id="direccion" name="direccion" required>
+                    </div>
+
+                    <div class="input-style">
+                        <label for="fecha_nacimiento">Fecha de Nacimiento:</label><br>
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                    </div>
+
+
+                    <select id="regiones"></select>
+                    <select id="provincias"></select>
+                    <select id="comunas"></select>
+
+                    <form action="{% url 'signup' %}">
                         <input type="submit" value="Registrarse">
+                        Registrarse
+                        </input>
                     </form>
-                </div>
+                </form>
+            </div>
         </div>
     </div>
-
 </body>
+
 </html>
+
+<!-- 
+
+
+
+
+
+def registrar_empleado(request):
+    if request.method == 'POST':
+        """ 
+        Iterando a través de todos los elementos en el diccionario request.POST, 
+        que contiene los datos enviados a través del método POST, e imprime cada par clave-valor en la consola
+        for key, value in request.POST.items():
+            print(f'{key}: {value}')
+        """
+        nombre = request.POST.get('nombre_empleado')
+        apellido = request.POST.get('apellido_empleado')
+        email = request.POST.get('email_empleado')
+        edad = request.POST.get('edad_empleado')
+        genero = request.POST.get('genero_empleado')
+        salario = request.POST.get('salario_empleado')
+
+        # Obtén la imagen del formulario
+        foto_empleado = request.FILES.get('foto_empleado')
+
+        if foto_empleado:
+            foto_empleado = generate_unique_filename(foto_empleado)
+
+        # Procesa los datos y guarda en la base de datos
+        empleado = Empleado(
+            nombre_empleado=nombre,
+            apellido_empleado=apellido,
+            email_empleado=email,
+            edad_empleado=edad,
+            genero_empleado=genero,
+            salario_empleado=salario,
+            foto_empleado=foto_empleado,
+        )
+        empleado.save()
+
+        messages.success(
+            request, f"Felicitaciones, el empleado {nombre} fue registrado correctamente 😉")
+        return redirect('listar_empleados')
+
+    # Si no se ha enviado el formulario, simplemente renderiza la plantilla con el formulario vacío
+    return redirect('inicio')
+-->

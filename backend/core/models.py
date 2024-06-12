@@ -62,15 +62,7 @@ class RegistroCuentaEmpleados(models.Model):
     ap_paterno = models.CharField(max_length=50)
     ap_materno = models.CharField(max_length=50)
     correo_alternativo = models.EmailField(null=True, blank=True)
-    contrasena = models.CharField(
-        max_length=50,
-        validators=[
-            RegexValidator(
-                regex=r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
-                message='La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial.'
-            )
-        ]
-    )
+    contrasena = models.CharField(max_length=50)
     telefono = models.CharField(max_length=50)
     direccion = models.CharField(max_length=50)
     # Campos de fecha
