@@ -1,5 +1,11 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.utils.crypto import get_random_string
+import uuid
+from django.utils import timezone
+from datetime import date
+
 
 
 class Region (models.Model):
@@ -24,6 +30,12 @@ class Comuna (models.Model):
  
     def __str__(self):
         return self.nombre + ', Provincia' + self.id_provincia.nombre
+
+
+
+"""
+
+
 
 #Registro de usuarios que utilizaran la pagina
 class RegistroCuentaUsuario (models.Model):
@@ -123,6 +135,113 @@ class RegistroCuentaEmpleados(models.Model):
         return f'Usuario: {self.nombre_usuario} - Rut: {str(self.rut)}'
     
     
+"""
+    
+
+
+"""
+class CustomUserManager(BaseUserManager):
+    def create_user(self, username, email=None, password=None, **extra_fields):
+        if not username:
+            raise ValueError('The Username field must be set')
+        email = self.normalize_email(email)
+        extra_fields.setdefault('fecha_nacimiento', date.today())  # Valor por defecto para fecha_nacimiento
+        extra_fields.setdefault('id_comuna', 1)  
+        user = self.model(username=username, email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, email=None, password=None, **extra_fields):
+        extra_fields.setdefault('user_type', 3)  # 3 es para 'Admin'
+        return self.create_user(username, email, password, **extra_fields)
+"""    
+class CustomUser(AbstractUser):
+    USER_TYPE_CHOICES = (
+      (1, 'Usuario'),
+      (2, 'Empleado'),
+      (3, 'Admin')
+    )
+    user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)    
+    nombre = models.CharField(max_length=50)
+    ap_paterno = models.CharField(max_length=50)
+    ap_materno = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=8)
+    email = models.EmailField(unique=True)
+    direccion = models.CharField(max_length=50)
+    fecha_nacimiento = models.DateField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    ultimo_acceso = models.DateTimeField(auto_now=True)
+    id_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
+
+    #objects = CustomUserManager()
+    
+class Empleado(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=False)  # No permitir null 
+    rut = models.CharField(max_length=15, unique=True, primary_key=True, help_text="Ingrese el RUT sin puntos ni guión")
+    OPCIONES_ROL = [
+        ('Usuario', 'Usuario normal'),
+        ('EncargadoHabitacion', 'Encargado de Habitaciones'),
+        ('EncargadoInventario', 'Encargado de Inventario'),
+        ('EncargadoServAdicional', 'Encargado de Servicios Adicionales'),
+        ('EncargadoReserva', 'Encargado de Reservas'),
+        ('EncargadoMantencion', 'Encargado de Mantención'),
+        ('EncargadoFinanzas', 'Encargado de Finanzas'),
+        ('EncargadoCliente', 'Encargado de Clientes'),
+        ('EncargadoRestaurante', 'Encargado de Restaurante'),
+        ('EncargadoBar', 'Encargado de Bar'),
+        ('EncargadoSpa', 'Encargado de Spa'),
+        ('EncargadoPiscina', 'Encargado de Piscina'),
+        ('EncargadoGimnasio', 'Encargado de Gimnasio'),
+        ('EncargadoSalonEventos', 'Encargado de Salón de Eventos'),
+        ('EncargadoTienda', 'Encargado de Tienda'),
+        ('EncargadoCocina', 'Encargado de Cocina'),
+        ('EncargadoLavanderia', 'Encargado de Lavandería'),
+        ('EncargadoRecepcion', 'Encargado de Recepción'),
+        ('EncargadoSeguridad', 'Encargado de Seguridad'),
+        ('EncargadoMascotas', 'Encargado de Mascotas'),
+        ('EncargadoJardineria', 'Encargado de Jardinería'),
+        ('EncargadoAseo', 'Encargado de Aseo'),
+        ('EncargadoMensajeria', 'Encargado de Mensajería'),
+        ('EncargadoEstacionamiento', 'Encargado de Estacionamiento'),
+        ('EncargadoMantVehiculos', 'Encargado de Mantención de Vehículos'),
+        ('EncargadoMantMaquinaria', 'Encargado de Mantención de Maquinaria'),
+        ('EncargadoMantEquipos', 'Encargado de Mantención de Equipos'),
+        ('EncargadoMantInfraestructura', 'Encargado de Mantención de Infraestructura'),
+        ('EncargadoMantTecnologia', 'Encargado de Mantención de Tecnología'),
+        ('EncargadoMantRedes', 'Encargado de Mantención de Redes'),
+        ('EncargadoMantSistemas', 'Encargado de Mantención de')
+    ]
+    roles = models.CharField(max_length=50, choices=OPCIONES_ROL, default='Usuario')
+    
+    def __str__(self):
+        if self.user.username == 'empleado':
+            return 'Usuario empleado'
+        return f'Usuario: {self.user.username} - Rut: {str(self.rut)}'
+
+class Usuario(models.Model):
+    # OneToOneField crea una relación uno a uno con el modelo CustomUser.
+    # Esto significa que cada instancia de Usuario está relacionada con una única instancia de CustomUser.
+    # on_delete=models.CASCADE especifica que cuando se elimina el CustomUser relacionado, también se debe eliminar el Usuario.
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    
+    # UUIDField es un campo que almacena un UUID (Universally Unique Identifier).
+    # default=uuid.uuid4 especifica que el valor predeterminado para este campo debe ser un UUID aleatorio generado por la función uuid4.
+    # editable=False especifica que este campo no puede ser modificado en los formularios de Django Admin.
+    # primary_key=True especifica que este campo es la clave primaria del modelo Usuario.
+    id_usuario = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)    
+    
+    def save(self, *args, **kwargs):
+        if not self.user.username:
+            # Genera un nombre de usuario único
+            self.user.username = get_random_string(length=10)
+        else:
+            # Extrae la parte antes del '@' en el correo
+            self.user.username = self.email.split('@')[0]
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.nombre
     
 #Ej: vip, nose ,normal ,etc
 class Categoria (models.Model):
@@ -143,7 +262,7 @@ class Categoria (models.Model):
         
         def __str__(self):
             return self.nombre
-
+        
 #Ej: habitacion simple, doble, triple, etc
 class TipoHabitacion (models.Model):
         id_tipo_habitacion = models.AutoField(primary_key=True)
@@ -224,7 +343,7 @@ class RegistroHabitacion (models.Model):
         estado_habitacion = models.BooleanField()
         id_servicio = models.ForeignKey(RegistroServicioAdicional, on_delete=models.CASCADE)
         id_tipo_habitacion = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
-        id_empleado = models.ForeignKey(RegistroCuentaEmpleados, on_delete=models.CASCADE)
+        id_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
         id_hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
        
         def __str__(self):

@@ -16,14 +16,14 @@ class ComunaSerializer (serializers.ModelSerializer):
         model = Comuna
         fields = '__all__'
         
-class RegistroCuentaUsuarioSerializer (serializers.ModelSerializer):
+class UsuarioSerializer (serializers.ModelSerializer):
     class Meta:
-        model = RegistroCuentaUsuario
+        model = Usuario
         fields = '__all__'
 
-class RegistroCuentaEmpleadosSerializer (serializers.ModelSerializer):
+class EmpleadoSerializer (serializers.ModelSerializer):
     class Meta:
-        model = RegistroCuentaEmpleados
+        model = Empleado
         fields = '__all__'
 
 class CategoriaSerializer (serializers.ModelSerializer):

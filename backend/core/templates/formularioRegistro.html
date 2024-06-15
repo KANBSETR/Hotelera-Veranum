@@ -15,78 +15,34 @@
 
 </head>
 
-<body>
-    <div class="container-center">
-        <div class="form-div">
-            <div class="title-form">
-                <h1>Registro de Usuario</h1>
-            </div>
-            <div class="content-form">
-                <form method="POST">
-                    {%csrf_token%}
+<body><form method="post" id="myForm">
+    {% csrf_token %}
+    {{ form.user_type.errors }}
+    {{ form.user_type.label_tag }}
+    {{ form.user_type }}
 
-                    {{form.as_p}}
-
-                    <label for="nombre_usuario">Nombre de usuario:</label>
-                    <br>
-                    <div class="input-style">
-                        <input type="text" id="nombre_usuario" name="nombre_usuario" required>
-                    </div>
-
-                    <div class="input-style">
-                        <label for="nombre">Nombre:</label><br>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-
-                    <div class="input-style">
-                        <label for="ap_paterno">Apellido Paterno:</label><br>
-                        <input type="text" id="ap_paterno" name="ap_paterno" required>
-                    </div>
-                    <div class="input-style">
-                        <label for="ap_materno">Apellido Materno:</label><br>
-                        <input type="text" id="ap_materno" name="ap_materno" required>
-                    </div>
-
-                    <div class="input-style">
-                        <label for="correo">Correo:</label><br>
-                        <input type="email" id="correo" name="correo" required>
-                    </div>
-
-                    <div class="input-style">
-                        <label for="contraseña">Contraseña:</label><br>
-                        <input type="password" id="contraseña" name="contraseña" required>
-                    </div>
-
-                    <div class="input-style">
-                        <label for="telefono">Teléfono:</label><br>
-                        <input type="tel" id="telefono" name="telefono" required>
-                    </div>
-
-                    <div class="input-style">
-                        <label for="direccion">Dirección:</label><br>
-                        <input type="text" id="direccion" name="direccion" required>
-                    </div>
-
-                    <div class="input-style">
-                        <label for="fecha_nacimiento">Fecha de Nacimiento:</label><br>
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
-                    </div>
-
-
-                    <select id="regiones"></select>
-                    <select id="provincias"></select>
-                    <select id="comunas"></select>
-
-                    <form action="{% url 'signup' %}">
-                        <input type="submit" value="Registrarse">
-                        Registrarse
-                        </input>
-                    </form>
-                </form>
-            </div>
-        </div>
+    <div id="rutField" style="display: none;">
+        {{ form.rut.errors }}
+        {{ form.rut.label_tag }}
+        {{ form.rut }}
     </div>
+
+    <!-- Repite el patrón anterior para cada uno de los otros campos -->
+
+    <button type="submit">Register</button>
+</form>
+
 </body>
+
+<script>
+    document.getElementById('id_user_type').addEventListener('change', function() {
+        if (this.value == '2') {  // 2 es el valor para 'Empleado'
+            document.getElementById('rutField').style.display = 'block';
+        } else {
+            document.getElementById('rutField').style.display = 'none';
+        }
+    });
+</script>
 
 </html>
 

@@ -23,13 +23,13 @@ class ComunaListCreateAPIView(generics.ListCreateAPIView):
     queryset = Comuna.objects.all()
     serializer_class = ComunaSerializer
     
-class RegistroCuentaUsuarioListCreateAPIView(generics.ListCreateAPIView):
-    queryset = RegistroCuentaUsuario.objects.all()
-    serializer_class = RegistroCuentaUsuarioSerializer
+class UsuarioListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
 
-class RegistroCuentaEmpleadosListCreateAPIView(generics.ListCreateAPIView):
-    queryset = RegistroCuentaEmpleados.objects.all()
-    serializer_class = RegistroCuentaEmpleadosSerializer
+class EmpleadoListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Empleado.objects.all()
+    serializer_class = EmpleadoSerializer
 
 class CategoriaListCreateAPIView(generics.ListCreateAPIView):
     queryset = Categoria.objects.all()
@@ -65,13 +65,13 @@ class ComunaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comuna.objects.all()
     serializer_class = ComunaSerializer
 
-class RegistroCuentaUsuarioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = RegistroCuentaUsuario.objects.all()
-    serializer_class = RegistroCuentaUsuarioSerializer
+class UsuarioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
 
-class RegistroCuentaEmpleadosDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = RegistroCuentaEmpleados.objects.all()
-    serializer_class = RegistroCuentaEmpleadosSerializer
+class EmpleadoDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Empleado.objects.all()
+    serializer_class = EmpleadoSerializer
 
 class CategoriaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Categoria.objects.all()

@@ -23,8 +23,8 @@ def inicioSesion(request):
             'form': AuthenticationForm
         })
     else:
-        user = authenticate(request, nombre_usuario=request.POST['nombre_usuario'],
-                            contrasena=request.POST['contrasena'])
+        user = authenticate(request, username=request.POST['username'],
+                            password=request.POST['password'])
         if user is None:
             return render(request, 'formularioLogin.html', {
                 'form': AuthenticationForm,
@@ -41,10 +41,10 @@ def signup(request):
             'form': UserCreationForm
         })
     else:
-        if request.POST['contrasena']:
+        if request.POST['password1'] == request.POST['password2']:
             try:
-                user = User.objects.create_user(username=request.POST['nombre_usuario'],
-                                                password=request.POST['contrasena'])
+                user = User.objects.create_user(username=request.POST['username'],
+                                                password=request.POST['password'])
                 user.save()
                 login(request, user)
                 return redirect('base')
