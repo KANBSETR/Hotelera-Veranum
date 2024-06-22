@@ -14,6 +14,7 @@ from .forms import HabitacionForm
 from core.models import RegistroHabitacion
 
 
+
 def listar_habitaciones(request):
     habitaciones = RegistroHabitacion.objects.all()
     return render(request, 'habitacion.html', {'habitaciones': habitaciones})

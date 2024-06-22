@@ -3,19 +3,17 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
+from .forms import PersonaForm, EmpleadoForm, UsuarioForm
+from core.models import Persona
+import json
+from django.http import JsonResponse
+from django.contrib import messages
 
-
-
-def formulario(request):
-    return render(request, 'formularioRegistro.html')
-
-
+from django.views.decorators.csrf import csrf_exempt
+from .models import Empleado, Usuario
 
 def inicio(request):
     return render(request, 'inicio.html')
-
-
-
 
 def inicioSesion(request):
     if request.method == 'GET':
@@ -30,31 +28,53 @@ def inicioSesion(request):
                 'form': AuthenticationForm,
                 'error': 'Usuario o contraseña incorrecta'
             })
-        else:
-            login(request, user)
-            return redirect('habitaciones')
 
 
-def signup(request):
-    if request.method == 'GET':
-        return render(request, 'formularioRegistro.html', {
-            'form': UserCreationForm
-        })
+    
+    
+def formulario (request):
+    if request.method == 'POST':
+        form = PersonaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
     else:
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-                user = User.objects.create_user(username=request.POST['username'],
-                                                password=request.POST['password'])
-                user.save()
-                login(request, user)
-                return redirect('base')
-            except IntegrityError:
-                return render(request, 'formularioRegistro.html', {
-                    'form': UserCreationForm,
-                    'error': 'El Usuario ya existe'
-                })
-        return render(request, 'formularioRegistro.html', {
-            'form': UserCreationForm,
-            'error': 'Las contraseñas no coinciden'
-        })
+        form = PersonaForm()
+    return render(request, 'formularioRegistro.html', {'form': form})
 
+
+
+def register(request):
+    if request.method == 'POST':
+        persona_form = PersonaForm(request.POST)
+        employee_form = EmpleadoForm(request.POST)
+        usuario_form = UsuarioForm(request.POST)
+        if persona_form.is_valid():
+            user = persona_form.save()
+            form_type = request.POST.get('form_type')
+            if form_type == 'employee':
+                employee_form = EmpleadoForm(request.POST)
+                if employee_form.is_valid():
+                    employee = employee_form.save(commit=False)
+                    employee.rut = user.rut
+                    employee.save()
+                else:
+                    messages.error(request, 'Formulario de empleado no válido')
+                    return render(request, 'formularioRegistro.html', {'persona_form': persona_form, 'employee_form': employee_form})
+            elif form_type == 'user':
+                usuario_form = UsuarioForm(request.POST)
+                if usuario_form.is_valid():
+                    usuario = usuario_form.save(commit=False)
+                    usuario.rut = user.rut
+                    usuario.save()
+                else:
+                    messages.error(request, 'Formulario de usuario no válido')
+                    return render(request, 'formularioRegistro.html', {'persona_form': persona_form, 'usuario_form': usuario_form})
+            return redirect('base.html')
+        else:
+            messages.error(request, 'Formulario de persona no válido')
+    else:
+        persona_form = PersonaForm()
+        employee_form = EmpleadoForm()
+        usuario_form = UsuarioForm()
+    return render(request, 'formularioRegistro.html', {'persona_form': persona_form, 'employee_form': employee_form, 'usuario_form': usuario_form})

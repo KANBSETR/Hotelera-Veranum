@@ -25,85 +25,31 @@ class ProvinciaAdmin(admin.ModelAdmin):
 class ComunaAdmin(admin.ModelAdmin):
     list_display = ['id_comuna','nombre','id_provincia']
 
-@admin.register(CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email', 'id_comuna']
+@admin.register(Genero)
+class GeneroAdmin(admin.ModelAdmin):
+    list_display = ['idGenero','nombre']
+
+
+@admin.register(Cargo)
+class CargoAdmin(admin.ModelAdmin):
+    list_display = ['idCargo','nombreCargo']
+
+@admin.register(Persona)
+class PersonaAdmin(admin.ModelAdmin):
+    list_display = ['nombre', 'email', 'comuna']
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ['get_username', 'get_email', 'get_ap_paterno', 'get_ap_materno', 'get_nombre', 'get_fecha_nacimiento', 'get_fecha_creacion', 'get_ultimo_acceso']
-
-    def get_username(self, obj):
-        return obj.user.username
-    get_username.short_description = 'Username'  
-
-    def get_email(self, obj):
-        return obj.user.email
-    get_email.short_description = 'Email'
-    
-    def get_ap_paterno(self, obj):
-        return obj.ap_paterno
-    get_ap_paterno.short_description = 'ap_paterno'
-    
-    def get_ap_materno(self, obj):
-        return obj.ap_materno
-    get_ap_materno.short_description = 'ap_materno'
-    
-    def get_nombre(self, obj):
-        return obj.nombre
-    get_nombre.short_description = 'Nombre'
-    
-    def get_fecha_nacimiento(self, obj):
-        return obj.fecha_nacimiento
-    get_fecha_nacimiento.short_description = 'Fecha Nacimiento'
-    
-    def get_fecha_creacion(self, obj):
-        return obj.fecha_creacion
-    get_fecha_creacion.short_description = 'Fecha Creacion'
-    
-    def get_ultimo_acceso(self, obj):
-        return obj.ultimo_acceso
-    get_ultimo_acceso.short_description = 'Ultimo Acceso'
-    
+    list_display = ['rut', 'idUsuario', 'usuario']
     
     
 @admin.register(Empleado)
 class EmpleadoAdmin(admin.ModelAdmin):
-    list_display = ['get_username', 'rut', 'get_email', 'get_ap_paterno', 'get_ap_materno', 'get_nombre', 'get_fecha_nacimiento', 'get_fecha_creacion', 'get_ultimo_acceso', 'roles']
+    list_display = ['rut', 'idEmpleado', 'codCargo']
     
-    def get_username(self, obj):
-        return obj.user.username
-    get_username.short_description = 'Username'  
-
-    def get_email(self, obj):
-        return obj.user.email
-    get_email.short_description = 'Email'
     
-    def get_ap_paterno(self, obj):
-        return obj.user.ap_paterno
-    get_ap_paterno.short_description = 'ap_paterno'
     
-    def get_ap_materno(self, obj):
-        return obj.user.ap_materno
-    get_ap_materno.short_description = 'ap_materno'
     
-    def get_nombre(self, obj):
-        return obj.user.nombre
-    get_nombre.short_description = 'Nombre'
-    
-    def get_fecha_nacimiento(self, obj):
-        return obj.user.fecha_nacimiento
-    get_fecha_nacimiento.short_description = 'Fecha Nacimiento'
-    
-    def get_fecha_creacion(self, obj):
-        return obj.user.fecha_creacion
-    get_fecha_creacion.short_description = 'Fecha Creacion'
-    
-    def get_ultimo_acceso(self, obj):
-        return obj.user.ultimo_acceso
-    get_ultimo_acceso.short_description = 'Ultimo Acceso'
-    
-
 @admin.register(Hotel)
 class HotelAdmin(admin.ModelAdmin):
     list_display = ['id_hotel','patente_hotel','nombre','telefono','correo','direccion',

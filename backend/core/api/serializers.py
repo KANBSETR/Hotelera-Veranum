@@ -15,7 +15,22 @@ class ComunaSerializer (serializers.ModelSerializer):
     class Meta:
         model = Comuna
         fields = '__all__'
+
+class GeneroSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Genero
+        fields = '__all__'
         
+class CargoSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Cargo
+        fields = '__all__'
+
+class PersonaSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Persona
+        fields = '__all__'
+
 class UsuarioSerializer (serializers.ModelSerializer):
     class Meta:
         model = Usuario

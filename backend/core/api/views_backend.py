@@ -23,6 +23,18 @@ class ComunaListCreateAPIView(generics.ListCreateAPIView):
     queryset = Comuna.objects.all()
     serializer_class = ComunaSerializer
     
+class GeneroListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializer
+
+class CargoListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Cargo.objects.all()
+    serializer_class = CargoSerializer
+
+class PersonaListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Persona.objects.all()
+    serializer_class = PersonaSerializer
+    
 class UsuarioListCreateAPIView(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
@@ -64,6 +76,19 @@ class ProvinciaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 class ComunaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comuna.objects.all()
     serializer_class = ComunaSerializer
+    
+    
+class GeneroDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializer
+
+class CargoDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Cargo.objects.all()
+    serializer_class = CargoSerializer
+
+class PersonaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Persona.objects.all()
+    serializer_class = PersonaSerializer
 
 class UsuarioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()

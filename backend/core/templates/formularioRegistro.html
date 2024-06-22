@@ -1,94 +1,90 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
-
-    <!-- formulario.html -->
-    <script src="/static/js/form.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!--Styles-->
-    <link rel="stylesheet" href="/static/css/styleForms.css">
-
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styleForms.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
-<body><form method="post" id="myForm">
-    {% csrf_token %}
-    {{ form.user_type.errors }}
-    {{ form.user_type.label_tag }}
-    {{ form.user_type }}
+<body>
 
-    <div id="rutField" style="display: none;">
-        {{ form.rut.errors }}
-        {{ form.rut.label_tag }}
-        {{ form.rut }}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h3 class="mb-4">Registro de usuario</h3>
+                        </div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                            </ul>
+                            {% endif %}
+                            {% if persona_form.errors %}
+                            <div class="alert alert-danger">
+                                {{ persona_form.errors }}
+                            </div>
+                            {% endif %}
+                            <div class="form-row">
+                                <div class="form-group col-md-9">
+                                    {{ persona_form.rut|as_crispy_field }}
+                                    <input type="hidden" id="dv" name="dv">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    {{ persona_form.nombre|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ persona_form.apPaterno|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ persona_form.apMaterno|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ persona_form.email|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ persona_form.comuna|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ persona_form.genero|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    {{ persona_form.telefono|as_crispy_field }}
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <div class="d-grid">
+                                            <button class="btn btn-primary btn-lg" type="submit">Registrarse</button>
+                                        </div>
+                                    </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Repite el patrón anterior para cada uno de los otros campos -->
-
-    <button type="submit">Register</button>
-</form>
-
+    <!--<script src="/static/js/form.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="/static/js/rutformat.js"></script>
+    <script>
+        document.getElementById('id_rut').addEventListener('input', function (e) {
+            var rut = e.target.value;
+            var dv = rut.split('-')[1];
+            if (dv) {
+                document.getElementById('dv').value = dv;
+            }
+        });
+    </script>
 </body>
 
-<script>
-    document.getElementById('id_user_type').addEventListener('change', function() {
-        if (this.value == '2') {  // 2 es el valor para 'Empleado'
-            document.getElementById('rutField').style.display = 'block';
-        } else {
-            document.getElementById('rutField').style.display = 'none';
-        }
-    });
-</script>
-
 </html>
-
-<!-- 
-
-
-
-
-
-def registrar_empleado(request):
-    if request.method == 'POST':
-        """ 
-        Iterando a través de todos los elementos en el diccionario request.POST, 
-        que contiene los datos enviados a través del método POST, e imprime cada par clave-valor en la consola
-        for key, value in request.POST.items():
-            print(f'{key}: {value}')
-        """
-        nombre = request.POST.get('nombre_empleado')
-        apellido = request.POST.get('apellido_empleado')
-        email = request.POST.get('email_empleado')
-        edad = request.POST.get('edad_empleado')
-        genero = request.POST.get('genero_empleado')
-        salario = request.POST.get('salario_empleado')
-
-        # Obtén la imagen del formulario
-        foto_empleado = request.FILES.get('foto_empleado')
-
-        if foto_empleado:
-            foto_empleado = generate_unique_filename(foto_empleado)
-
-        # Procesa los datos y guarda en la base de datos
-        empleado = Empleado(
-            nombre_empleado=nombre,
-            apellido_empleado=apellido,
-            email_empleado=email,
-            edad_empleado=edad,
-            genero_empleado=genero,
-            salario_empleado=salario,
-            foto_empleado=foto_empleado,
-        )
-        empleado.save()
-
-        messages.success(
-            request, f"Felicitaciones, el empleado {nombre} fue registrado correctamente 😉")
-        return redirect('listar_empleados')
-
-    # Si no se ha enviado el formulario, simplemente renderiza la plantilla con el formulario vacío
-    return redirect('inicio')
--->
