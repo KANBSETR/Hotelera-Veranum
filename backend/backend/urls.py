@@ -21,6 +21,7 @@ urlpatterns = [
     path('core/', include('core.urls')),
     path('habitaciones/',include('habitaciones.urls')),
     path('serviciosAd/',include('serviciosadicionales.urls')),
+    path('eventos/',include('centroeventos.urls')),
     path('', views.LoadMenu.as_view()),
     path('frontend/', include('frontend.urls')),
 
