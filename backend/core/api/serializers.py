@@ -15,15 +15,30 @@ class ComunaSerializer (serializers.ModelSerializer):
     class Meta:
         model = Comuna
         fields = '__all__'
-        
-class RegistroCuentaUsuarioSerializer (serializers.ModelSerializer):
+
+class GeneroSerializer (serializers.ModelSerializer):
     class Meta:
-        model = RegistroCuentaUsuario
+        model = Genero
+        fields = '__all__'
+        
+class CargoSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Cargo
         fields = '__all__'
 
-class RegistroCuentaEmpleadosSerializer (serializers.ModelSerializer):
+class PersonaSerializer (serializers.ModelSerializer):
     class Meta:
-        model = RegistroCuentaEmpleados
+        model = Persona
+        fields = '__all__'
+
+class UsuarioSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = '__all__'
+
+class EmpleadoSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Empleado
         fields = '__all__'
 
 class CategoriaSerializer (serializers.ModelSerializer):

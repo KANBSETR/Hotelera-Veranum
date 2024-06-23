@@ -23,13 +23,25 @@ class ComunaListCreateAPIView(generics.ListCreateAPIView):
     queryset = Comuna.objects.all()
     serializer_class = ComunaSerializer
     
-class RegistroCuentaUsuarioListCreateAPIView(generics.ListCreateAPIView):
-    queryset = RegistroCuentaUsuario.objects.all()
-    serializer_class = RegistroCuentaUsuarioSerializer
+class GeneroListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializer
 
-class RegistroCuentaEmpleadosListCreateAPIView(generics.ListCreateAPIView):
-    queryset = RegistroCuentaEmpleados.objects.all()
-    serializer_class = RegistroCuentaEmpleadosSerializer
+class CargoListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Cargo.objects.all()
+    serializer_class = CargoSerializer
+
+class PersonaListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Persona.objects.all()
+    serializer_class = PersonaSerializer
+    
+class UsuarioListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+
+class EmpleadoListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Empleado.objects.all()
+    serializer_class = EmpleadoSerializer
 
 class CategoriaListCreateAPIView(generics.ListCreateAPIView):
     queryset = Categoria.objects.all()
@@ -64,14 +76,27 @@ class ProvinciaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 class ComunaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comuna.objects.all()
     serializer_class = ComunaSerializer
+    
+    
+class GeneroDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializer
 
-class RegistroCuentaUsuarioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = RegistroCuentaUsuario.objects.all()
-    serializer_class = RegistroCuentaUsuarioSerializer
+class CargoDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Cargo.objects.all()
+    serializer_class = CargoSerializer
 
-class RegistroCuentaEmpleadosDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = RegistroCuentaEmpleados.objects.all()
-    serializer_class = RegistroCuentaEmpleadosSerializer
+class PersonaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Persona.objects.all()
+    serializer_class = PersonaSerializer
+
+class UsuarioDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+
+class EmpleadoDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Empleado.objects.all()
+    serializer_class = EmpleadoSerializer
 
 class CategoriaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Categoria.objects.all()
