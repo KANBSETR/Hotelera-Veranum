@@ -227,12 +227,12 @@ class HotelDetalle (models.Model):
         
         
 class FormaPago(models.Model): 
-    idFPago = models.IntegerField(null=False, primary_key=True,db_column='codFormaPago')
+    idFPago = models.AutoField(null=False, primary_key=True,db_column='codFormaPago')
     codigo = models.CharField(max_length=10)
     nombre = models.CharField(max_length=200, null=False,db_column='descripcion')
     
     def __str__(self):
-        return self.descripcion
+        return self.nombre
 
 class Eventos(models.Model):
     idEvento = models.AutoField(primary_key=True)

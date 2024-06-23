@@ -61,4 +61,11 @@ class RegistroHabitacionAdmin(admin.ModelAdmin):
                     'cant_camas','tamano_camas','cant_personas_disp','descripcion','precio',
                     'estado_habitacion','id_servicio','id_tipo_habitacion','id_empleado','id_hotel']
     
+
+@admin.register(Eventos)
+class EventosAdmin(admin.ModelAdmin):
+    list_display = ['nombre','fechaInicio','fechaTermino','descripcion','precio','estado','idHotel','idFormaPago','idEmpleado','idUsuario']
     
+@admin.register(FormaPago)
+class FormaPagoAdmin(admin.ModelAdmin):
+    list_display = ['codigo','nombre']
