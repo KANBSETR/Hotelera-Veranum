@@ -78,3 +78,9 @@ def register(request):
         employee_form = EmpleadoForm()
         usuario_form = UsuarioForm()
     return render(request, 'formularioRegistro.html', {'persona_form': persona_form, 'employee_form': employee_form, 'usuario_form': usuario_form})
+
+def about(request):
+    return render(request, 'about.html')
+
+def usuario(request):
+    return render(request, 'usuarios.html')

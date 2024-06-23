@@ -18,9 +18,11 @@ from rest_framework_simplejwt.views import TokenVerifyView
 urlpatterns = [
     path('admin/', admin.site.urls),    
     path('api/core/', include(router.urls)),
-    path('core/', include('core.urls')),
+    path('', include('core.urls')),
     path('habitaciones/',include('habitaciones.urls')),
     path('serviciosAd/',include('serviciosadicionales.urls')),
+    path('inventario/',include('inventario.urls')),
+    path('eventos/',include('centroeventos.urls')),
     path('', views.LoadMenu.as_view()),
     path('frontend/', include('frontend.urls')),
 

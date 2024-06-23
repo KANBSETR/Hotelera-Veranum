@@ -118,6 +118,22 @@ class RegistroHabitacionDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = RegistroHabitacion.objects.all()
     serializer_class = RegistroHabitacionSerializer
 
+class ReservaListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Reserva.objects.all()
+    serializer_class = ReservaSerializer
+
+class ReservaDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Reserva.objects.all()
+    serializer_class = ReservaSerializer
+
+
+
+
+
+
+
+
+
 """
   def patch(self,request, pk=None):
         try:

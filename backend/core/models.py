@@ -226,7 +226,6 @@ class HotelDetalle (models.Model):
             return self.nombre
         
         
-
 class FormaPago(models.Model): 
     idFPago = models.IntegerField(null=False, primary_key=True,db_column='codFormaPago')
     codigo = models.CharField(max_length=10)
@@ -234,8 +233,6 @@ class FormaPago(models.Model):
     
     def __str__(self):
         return self.descripcion
-
-
 
 class Eventos(models.Model):
     idEvento = models.AutoField(primary_key=True)
@@ -255,7 +252,18 @@ class Eventos(models.Model):
     def __str__(self):
         return self.nombre
 
-
+class Reserva(models.Model):
+    idReserva = models.AutoField(primary_key=True)
+    fechaInicio = models.DateTimeField()
+    fechaTermino = models.DateTimeField()
+    estado = models.BooleanField()
+    idHabitacion = models.ForeignKey(RegistroHabitacion, on_delete=models.CASCADE)
+    idHotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+    idUsuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    fCreacion = models.DateTimeField(auto_now_add=True, auto_now=False)
+    
+    def __str__(self):
+        return self.idReserva
 
 
 
@@ -264,11 +272,7 @@ class Eventos(models.Model):
 
 
 # Codigo en caso de:
-
 """
-
-
-
 #Registro de usuarios que utilizaran la pagina
 class RegistroCuentaUsuario (models.Model):
     #Campos de texto

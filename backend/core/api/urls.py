@@ -17,6 +17,7 @@ urlpatterns = [
     path('api/registro-servicio-adicional/', RegistroServicioAdicionalListCreateAPIView.as_view(), name='registro-servicio-adicional-list'),
     path('api/hoteles/', HotelListCreateAPIView.as_view(), name='hotel-list'),
     path('api/registro-habitacion/', RegistroHabitacionListCreateAPIView.as_view(), name='registro-habitacion-list'),
+    path('api/reserva/', ReservaListCreateAPIView.as_view(), name='reserva-list'),
     # Toda clase con RetrieveUpdateDestroyAPIView es para ver, actualizar y eliminar en json
     path('api/regiones/<int:pk>/', RegionDetailAPIView.as_view(), name='region-detail'),
     path('api/provincias/<int:pk>/', ProvinciaDetailAPIView.as_view(), name='provincia-detail'),
@@ -31,4 +32,5 @@ urlpatterns = [
     path('api/registro-servicio-adicional/<int:pk>/', RegistroServicioAdicionalDetailAPIView.as_view(), name='registro-servicio-adicional-detail'),
     path('api/hoteles/<int:pk>/', HotelDetailAPIView.as_view(), name='hotel-detail'),
     path('api/registro-habitacion/<int:pk>/', RegistroHabitacionDetailAPIView.as_view(), name='registro-habitacion-detail'),
+    path('api/reserva/<int:pk>/', ReservaDetailAPIView.as_view(), name='reserva-detail'),
 ]
