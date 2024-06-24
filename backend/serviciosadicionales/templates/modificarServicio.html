@@ -2,19 +2,22 @@
 
 
 {% block content %}
-
-<h1>{{servicio.id_servicio}}</h1>
-    {{error}}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button>
-            Actualizar
-        </button>
-    </form>
-<form action="{% url 'servicio_delete' servicio.id_servicio%}">
-    <button>
-        Eliminar
-    </button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <h1>{{servicio.id_servicio}}</h1>
+                {{error}}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button>
+                        Actualizar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {%endblock%}
+

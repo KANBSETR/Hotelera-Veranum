@@ -44,7 +44,7 @@
                         <table class="table">
                             <thead> 
                                 <tr>
-                                    <th><button class="table-sort" data-sort="sort-quantity">{{ habitacion.numero_habitacion }}</button></th>
+                                    <th><button class="table-sort" data-sort="sort-quantity">Número de Habitación</button></th>
                                     <th><button class="table-sort" data-sort="sort-quantity">Cantidad Dormitorios</button></th>
                                     <th><button class="table-sort" data-sort="sort-quantity">Cantidad Baños</button></th>
                                     <th><button class="table-sort" data-sort="sort-quantity">Cantidad Camas</button></th>
@@ -52,6 +52,8 @@
                                     <th><button class="table-sort" data-sort="sort-quantity">Capacidad Habit.</button></th>
                                     <th><button class="table-sort" data-sort="sort-quantity">Precio</button></th>
                                     <th><button class="table-sort" data-sort="sort-name">Estado</button></th>
+                                    <th> </th>
+
                                 </tr>
                             </thead>
                             <tbody class="table-tbody">
@@ -61,9 +63,28 @@
                                     <td class="sort-quantity">{{ habitacion.cant_dormitorios }}</td>
                                     <td class="sort-quantity">{{ habitacion.cant_banos }}</td>
                                     <td class="sort-quantity">{{ habitacion.cant_camas }}</td>
+                                    <td class="sort-quantity">{{ habitacion.tamano_camas }}</td>
                                     <td class="sort-quantity">{{ habitacion.cant_personas_disp}}</td>
                                     <td class="sort-quantity">{{ habitacion.precio }}</td>
                                     <td class="sort-name">{{ habitacion.estado_habitacion }}</td>
+                                    <td>
+                                        <a href="{% url 'habitacion_detail' habitacion.id_habitacion%}" class="btn btn-success">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-pencil">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                                <path d="M13.5 6.5l4 4" />
+                                              </svg>
+                                        </a>
+                                        <a href="{% url 'habitacion_delete' habitacion.id_habitacion%}" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M4 7l16 0" />
+                                            <path d="M10 11l0 6" />
+                                            <path d="M14 11l0 6" />
+                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                          </svg></a>
+                                    </td>
+
                                 </tr>
                                 {% endfor %}
                             </tbody>

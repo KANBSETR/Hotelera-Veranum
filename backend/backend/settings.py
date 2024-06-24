@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'inventario.apps.InventarioConfig',
     'serviciosadicionales.apps.ServiciosadicionalesConfig',
     'centroeventos.apps.CentroeventosConfig',
+    'reservahabitaciones.apps.ReservahabitacionesConfig',
     'frontend.apps.FrontendConfig',
     'rest_framework',
     'rest_framework_simplejwt',

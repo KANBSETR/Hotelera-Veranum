@@ -223,7 +223,7 @@ class HotelDetalle (models.Model):
         id_registro_servicio_adicional = models.ForeignKey(RegistroServicioAdicional, on_delete=models.CASCADE)
         
         def __str__(self):
-            return self.nombre
+            return self.id_hotel
         
         
 class FormaPago(models.Model): 
@@ -272,123 +272,123 @@ class Reserva(models.Model):
 
 
 # Codigo en caso de:
-"""
+
 #Registro de usuarios que utilizaran la pagina
-class RegistroCuentaUsuario (models.Model):
-    #Campos de texto
-    id_usuario = models.AutoField(primary_key=True)
-    nombre_usuario = models.CharField(max_length=50)
-    nombre = models.CharField(max_length=50)
-    ap_paterno = models.CharField(max_length=50)
-    ap_materno = models.CharField(max_length=50)
-    correo = models.EmailField()
-    contrasena = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=8)
-    direccion = models.CharField(max_length=50)
-    #Campos de fecha
-    fecha_nacimiento = models.DateField() # Poner que de la edad solo
-    fecha_creacion = models.DateTimeField(auto_now_add=True) #Fecha de creacion de la cuenta
-    ultimo_acceso = models.DateTimeField(auto_now=True) # Ultimo acceso a la acuenta registrado
-    #Foraneas
-    id_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
+# class RegistroCuentaUsuario (models.Model):
+#     #Campos de texto
+#     id_usuario = models.AutoField(primary_key=True)
+#     nombre_usuario = models.CharField(max_length=50)
+#     nombre = models.CharField(max_length=50)
+#     ap_paterno = models.CharField(max_length=50)
+#     ap_materno = models.CharField(max_length=50)
+#     correo = models.EmailField()
+#     contrasena = models.CharField(max_length=50)
+#     telefono = models.CharField(max_length=8)
+#     direccion = models.CharField(max_length=50)
+#     #Campos de fecha
+#     fecha_nacimiento = models.DateField() # Poner que de la edad solo
+#     fecha_creacion = models.DateTimeField(auto_now_add=True) #Fecha de creacion de la cuenta
+#     ultimo_acceso = models.DateTimeField(auto_now=True) # Ultimo acceso a la acuenta registrado
+#     #Foraneas
+#     id_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
     
-    def save(self, *args, **kwargs):
-        self.nombre_usuario = self.correo.split('@')[0]  # Extrae la parte antes del '@' en el correo
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         self.nombre_usuario = self.correo.split('@')[0]  # Extrae la parte antes del '@' en el correo
+#         super().save(*args, **kwargs)
     
-    def __str__(self):
-        return self.nombre
+#     def __str__(self):
+#         return self.nombre
 
 
 
-#Solo el admin puede manejar estos registros
-class RegistroCuentaEmpleados(models.Model):
-    # Campos de texto
-    rut = models.CharField(max_length=10, unique=True, primary_key=True, help_text="Ingrese el RUT sin puntos ni guión")    
-    nombre_usuario = models.CharField(max_length=50, unique=True)
-    nombre = models.CharField(max_length=50)
-    ap_paterno = models.CharField(max_length=50)
-    ap_materno = models.CharField(max_length=50)
-    correo_alternativo = models.EmailField(null=True, blank=True)
-    contrasena = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=50)
-    # Campos de fecha
-    fecha_nacimiento = models.DateField()
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    ultimo_acceso = models.DateTimeField(auto_now=True)
-    # Foraneas
-    id_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
+# #Solo el admin puede manejar estos registros
+# class RegistroCuentaEmpleados(models.Model):
+#     # Campos de texto
+#     rut = models.CharField(max_length=10, unique=True, primary_key=True, help_text="Ingrese el RUT sin puntos ni guión")    
+#     nombre_usuario = models.CharField(max_length=50, unique=True)
+#     nombre = models.CharField(max_length=50)
+#     ap_paterno = models.CharField(max_length=50)
+#     ap_materno = models.CharField(max_length=50)
+#     correo_alternativo = models.EmailField(null=True, blank=True)
+#     contrasena = models.CharField(max_length=50)
+#     telefono = models.CharField(max_length=50)
+#     direccion = models.CharField(max_length=50)
+#     # Campos de fecha
+#     fecha_nacimiento = models.DateField()
+#     fecha_creacion = models.DateTimeField(auto_now_add=True)
+#     ultimo_acceso = models.DateTimeField(auto_now=True)
+#     # Foraneas
+#     id_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
 
-    OPCIONES_ROL = [
-        ('Usuario', 'Usuario normal'),
-        ('EncargadoHabitacion', 'Encargado de Habitaciones'),
-        ('EncargadoInventario', 'Encargado de Inventario'),
-        ('EncargadoServAdicional', 'Encargado de Servicios Adicionales'),
-        ('EncargadoReserva', 'Encargado de Reservas'),
-        ('EncargadoMantencion', 'Encargado de Mantención'),
-        ('EncargadoFinanzas', 'Encargado de Finanzas'),
-        ('EncargadoCliente', 'Encargado de Clientes'),
-        ('EncargadoRestaurante', 'Encargado de Restaurante'),
-        ('EncargadoBar', 'Encargado de Bar'),
-        ('EncargadoSpa', 'Encargado de Spa'),
-        ('EncargadoPiscina', 'Encargado de Piscina'),
-        ('EncargadoGimnasio', 'Encargado de Gimnasio'),
-        ('EncargadoSalonEventos', 'Encargado de Salón de Eventos'),
-        ('EncargadoTienda', 'Encargado de Tienda'),
-        ('EncargadoCocina', 'Encargado de Cocina'),
-        ('EncargadoLavanderia', 'Encargado de Lavandería'),
-        ('EncargadoRecepcion', 'Encargado de Recepción'),
-        ('EncargadoSeguridad', 'Encargado de Seguridad'),
-        ('EncargadoMascotas', 'Encargado de Mascotas'),
-        ('EncargadoJardineria', 'Encargado de Jardinería'),
-        ('EncargadoAseo', 'Encargado de Aseo'),
-        ('EncargadoMensajeria', 'Encargado de Mensajería'),
-        ('EncargadoEstacionamiento', 'Encargado de Estacionamiento'),
-        ('EncargadoMantVehiculos', 'Encargado de Mantención de Vehículos'),
-        ('EncargadoMantMaquinaria', 'Encargado de Mantención de Maquinaria'),
-        ('EncargadoMantEquipos', 'Encargado de Mantención de Equipos'),
-        ('EncargadoMantInfraestructura', 'Encargado de Mantención de Infraestructura'),
-        ('EncargadoMantTecnologia', 'Encargado de Mantención de Tecnología'),
-        ('EncargadoMantRedes', 'Encargado de Mantención de Redes'),
-        ('EncargadoMantSistemas', 'Encargado de Mantención de')
-    ]
+#     OPCIONES_ROL = [
+#         ('Usuario', 'Usuario normal'),
+#         ('EncargadoHabitacion', 'Encargado de Habitaciones'),
+#         ('EncargadoInventario', 'Encargado de Inventario'),
+#         ('EncargadoServAdicional', 'Encargado de Servicios Adicionales'),
+#         ('EncargadoReserva', 'Encargado de Reservas'),
+#         ('EncargadoMantencion', 'Encargado de Mantención'),
+#         ('EncargadoFinanzas', 'Encargado de Finanzas'),
+#         ('EncargadoCliente', 'Encargado de Clientes'),
+#         ('EncargadoRestaurante', 'Encargado de Restaurante'),
+#         ('EncargadoBar', 'Encargado de Bar'),
+#         ('EncargadoSpa', 'Encargado de Spa'),
+#         ('EncargadoPiscina', 'Encargado de Piscina'),
+#         ('EncargadoGimnasio', 'Encargado de Gimnasio'),
+#         ('EncargadoSalonEventos', 'Encargado de Salón de Eventos'),
+#         ('EncargadoTienda', 'Encargado de Tienda'),
+#         ('EncargadoCocina', 'Encargado de Cocina'),
+#         ('EncargadoLavanderia', 'Encargado de Lavandería'),
+#         ('EncargadoRecepcion', 'Encargado de Recepción'),
+#         ('EncargadoSeguridad', 'Encargado de Seguridad'),
+#         ('EncargadoMascotas', 'Encargado de Mascotas'),
+#         ('EncargadoJardineria', 'Encargado de Jardinería'),
+#         ('EncargadoAseo', 'Encargado de Aseo'),
+#         ('EncargadoMensajeria', 'Encargado de Mensajería'),
+#         ('EncargadoEstacionamiento', 'Encargado de Estacionamiento'),
+#         ('EncargadoMantVehiculos', 'Encargado de Mantención de Vehículos'),
+#         ('EncargadoMantMaquinaria', 'Encargado de Mantención de Maquinaria'),
+#         ('EncargadoMantEquipos', 'Encargado de Mantención de Equipos'),
+#         ('EncargadoMantInfraestructura', 'Encargado de Mantención de Infraestructura'),
+#         ('EncargadoMantTecnologia', 'Encargado de Mantención de Tecnología'),
+#         ('EncargadoMantRedes', 'Encargado de Mantención de Redes'),
+#         ('EncargadoMantSistemas', 'Encargado de Mantención de')
+#     ]
     
-    roles = models.CharField(max_length=50, choices=OPCIONES_ROL, default='Usuario')
+#     roles = models.CharField(max_length=50, choices=OPCIONES_ROL, default='Usuario')
     
-    def validate_unique(self, exclude=None):
-        exclude = ('rut',) if exclude is None else tuple(exclude) + ('rut',)
-        super().validate_unique(exclude=exclude)
+#     def validate_unique(self, exclude=None):
+#         exclude = ('rut',) if exclude is None else tuple(exclude) + ('rut',)
+#         super().validate_unique(exclude=exclude)
         
-    def __str__(self):
-        if self.nombre_usuario == 'admin':
-            return 'Usuario admin'
-        return f'Usuario: {self.nombre_usuario} - Rut: {str(self.rut)}'
+#     def __str__(self):
+#         if self.nombre_usuario == 'admin':
+#             return 'Usuario admin'
+#         return f'Usuario: {self.nombre_usuario} - Rut: {str(self.rut)}'
     
-    def __str__(self):
-        if self.nombre_usuario == 'empleado':
-            return 'Usuario empleado'
-        return f'Usuario: {self.nombre_usuario} - Rut: {str(self.rut)}'
+#     def __str__(self):
+#         if self.nombre_usuario == 'empleado':
+#             return 'Usuario empleado'
+#         return f'Usuario: {self.nombre_usuario} - Rut: {str(self.rut)}'
     
     
-"""
+# """
     
 
 
-"""
-class CustomUserManager(BaseUserManager):
-    def create_user(self, username, email=None, password=None, **extra_fields):
-        if not username:
-            raise ValueError('The Username field must be set')
-        email = self.normalize_email(email)
-        extra_fields.setdefault('fecha_nacimiento', date.today())  # Valor por defecto para fecha_nacimiento
-        extra_fields.setdefault('id_comuna', 1)  
-        user = self.model(username=username, email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
+# """
+# class CustomUserManager(BaseUserManager):
+#     def create_user(self, username, email=None, password=None, **extra_fields):
+#         if not username:
+#             raise ValueError('The Username field must be set')
+#         email = self.normalize_email(email)
+#         extra_fields.setdefault('fecha_nacimiento', date.today())  # Valor por defecto para fecha_nacimiento
+#         extra_fields.setdefault('id_comuna', 1)  
+#         user = self.model(username=username, email=email, **extra_fields)
+#         user.set_password(password)
+#         user.save(using=self._db)
+#         return user
 
-    def create_superuser(self, username, email=None, password=None, **extra_fields):
-        extra_fields.setdefault('user_type', 3)  # 3 es para 'Admin'
-        return self.create_user(username, email, password, **extra_fields)
-"""    
+#     def create_superuser(self, username, email=None, password=None, **extra_fields):
+#         extra_fields.setdefault('user_type', 3)  # 3 es para 'Admin'
+#         return self.create_user(username, email, password, **extra_fields)
+  

@@ -194,7 +194,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/inventario/inventarioListar" >
+                    <a class="nav-link" href="/inventario/listarInventario" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-building-warehouse">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -223,7 +223,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/eventos/listarEventos" >
+                    <a class="nav-link" href="/eventos/listarEvento" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-building">
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -311,5 +311,22 @@
     <!-- Tabler Core -->
     <script src="/static/js/tabler.min.js?1692870487" defer></script>
     <script src="/static/js/demo.min.js?1692870487" defer></script>
+
+    <!-- Libs JS -->
+    <script src="/static/js/list.min.js?1692870487" defer></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const list = new List('table-default', {
+      	sortClass: 'table-sort',
+      	listClass: 'table-tbody',
+      	valueNames: [ 'sort-name', 'sort-type', 'sort-city', 'sort-score',
+      		{ attr: 'data-date', name: 'sort-date' },
+      		{ attr: 'data-progress', name: 'sort-progress' },
+      		'sort-quantity'
+      	]
+      });
+      })
+    </script>
 </body>
 </html>

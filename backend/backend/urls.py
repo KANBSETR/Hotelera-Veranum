@@ -21,11 +21,9 @@ urlpatterns = [
     path('', include('core.urls')),
     path('habitaciones/',include('habitaciones.urls')),
     path('serviciosAd/',include('serviciosadicionales.urls')),
-<<<<<<< HEAD
     path('inventario/',include('inventario.urls')),
-=======
->>>>>>> 8b440665b871ba0a90c3da1b0d3f4c9c53eb5339
     path('eventos/',include('centroeventos.urls')),
+    path('reservahabitaciones/',include('reservahabitaciones.urls')),
     path('', views.LoadMenu.as_view()),
     path('frontend/', include('frontend.urls')),
 

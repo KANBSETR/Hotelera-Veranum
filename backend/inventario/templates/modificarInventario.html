@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <h1>{{habitacion.numero_habitacion}}</h1>
+                <h1>{{inventario.id_hotel_detalle}}</h1>
                 {{error}}
                 <form action="" method="POST">
                     {% csrf_token %}
@@ -16,14 +16,8 @@
                         Actualizar
                     </button>
                 </form>
-                <form action="{% url 'habitacion_delete' habitacion.id_habitacion%}">
-                    <button>
-                        Eliminar
-                    </button>
-                </form>
             </div>
         </div>
     </div>
 </div>
 {%endblock%}
-
