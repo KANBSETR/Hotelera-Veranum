@@ -2,19 +2,21 @@
 
 
 {% block content %}
-
-<h1>{{evento.idEvento}}</h1>
-    {{error}}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button>
-            Actualizar
-        </button>
-    </form>
-<form action="{% url 'evento_delete' evento.idEvento%}">
-    <button>
-        Eliminar
-    </button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <h1>{{eventos.nombre}}</h1>
+                {{error}}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button>
+                        Actualizar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {%endblock%}
