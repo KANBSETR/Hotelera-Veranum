@@ -40,7 +40,7 @@ def formulario (request):
             return redirect('home')
     else:
         form = PersonaForm()
-    return render(request, 'formularioRegistro.html', {'form': form})
+    return render(request, 'registro.html', {'form': form})
 
 
 
@@ -60,7 +60,7 @@ def register(request):
                     employee.save()
                 else:
                     messages.error(request, 'Formulario de empleado no válido')
-                    return render(request, 'formularioRegistro.html', {'persona_form': persona_form, 'employee_form': employee_form})
+                    return render(request, 'registro.html', {'persona_form': persona_form, 'employee_form': employee_form})
             elif form_type == 'user':
                 usuario_form = UsuarioForm(request.POST)
                 if usuario_form.is_valid():
@@ -69,7 +69,7 @@ def register(request):
                     usuario.save()
                 else:
                     messages.error(request, 'Formulario de usuario no válido')
-                    return render(request, 'formularioRegistro.html', {'persona_form': persona_form, 'usuario_form': usuario_form})
+                    return render(request, 'registro.html', {'persona_form': persona_form, 'usuario_form': usuario_form})
             return redirect('base.html')
         else:
             messages.error(request, 'Formulario de persona no válido')
@@ -77,7 +77,7 @@ def register(request):
         persona_form = PersonaForm()
         employee_form = EmpleadoForm()
         usuario_form = UsuarioForm()
-    return render(request, 'formularioRegistro.html', {'persona_form': persona_form, 'employee_form': employee_form, 'usuario_form': usuario_form})
+    return render(request, 'registro.html', {'persona_form': persona_form, 'employee_form': employee_form, 'usuario_form': usuario_form})
 
 def about(request):
     return render(request, 'about.html')

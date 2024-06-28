@@ -1,3 +1,5 @@
+{%extends 'inicioBase.html'%}
+{%block content%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +62,7 @@
                   </label>
                 </div>
                 <div class="form-footer">
-                  <button type="submit" class="btn btn-warning w-100">Inicia Sesion</button>
+                  <button type="submit" class="btn btn-warning w-100"> <a href="/habitaciones/listarHabitacion/">Inicia Sesion</a></button>
                 </div>
               </form>
             </div>
@@ -74,3 +76,4 @@
     <script src="/static/js/demo.min.js?1692870487" defer></script>
 </body>
 </html>
+{%endblock%}
